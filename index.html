@@ -6,8 +6,10 @@
 	<title>Slideshow Feed</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/main.css">
-	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 	<script src="js/app.js"></script>
 </head>
 <body>
@@ -20,7 +22,7 @@
 		<div id="content">
 			<div id="form" class="wrapper">
 				<input type="text" name="name" value="" placeholder="enter a tag">
-				<input type="date" name="name" value="">
+				<input type="text" id="datepicker" name="name" value="" placeholder="start date">
 				<button type="button" name="button">Show Me</button>
 			</div>
 			<div id="image" class="wrapper">
