@@ -5,7 +5,11 @@ $(function() {
 });
 
 var showImages = function(igObject) {
-
+	// empty the image id element
+	$('#image').empty();
+	// show a new image
+	var html = '<img src="' + igObject.data[0].images.standard_resolution.url + '" alt="' + igObject.data[0].caption.text + '">';
+	$('#image').append(html)
 };
 
 var getImages = function(tag) {
