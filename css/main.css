@@ -51,4 +51,7 @@ button {
 #image img {
 	width: 500px;
 	padding: 15px 0;
+	position: absolute;
+	left: 50%;
+	margin-left: -250px;
 }
