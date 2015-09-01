@@ -4,15 +4,15 @@ $(function() {
 	getImages('gigharbor');
 });
 
-var showImages = function(igObject) {
+var loadImages = function(igObject) {
 	// empty the image id element
 	$('#image').empty();
 	// show a new image
-	var html = '';
+	var html = [];
 	// make an array here
 	for (var i = 0; i < igObject.data.length; i++) {
-		html = '<img src="' + igObject.data[i].images.standard_resolution.url + '" alt="' + igObject.data[i].caption.text + '" id="image' + i + '">';
-		$('#image').append(html);
+		html[i] = '<img src="' + igObject.data[i].images.standard_resolution.url + '" alt="' + igObject.data[i].caption.text + '" id="image' + i + '">';
+		$('#image').append(html[i]);
 	}
 };
 
@@ -28,7 +28,7 @@ var getImages = function(tag) {
 	})
 	.done(function(response) {
 		console.log(response);
-		showImages(response);
+		loadImages(response);
 	})
 	.fail(function(jqXHR, error, errorThrown){
 		var errorElem = showError(error);
