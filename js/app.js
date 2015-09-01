@@ -10,7 +10,7 @@ var showImages = function(igObject) {
 	// show a new image
 	var html = '';
 	for (var i = 0; i < igObject.data.length; i++) {
-		html = '<img src="' + igObject.data[i].images.standard_resolution.url + '" alt="' + igObject.data[i].caption.text + '">';
+		html = '<img src="' + igObject.data[i].images.standard_resolution.url + '" alt="' + igObject.data[i].caption.text + '" id="image' + i + '">';
 		$('#image').append(html);
 	}
 };
