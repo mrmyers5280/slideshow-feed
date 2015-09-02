@@ -1,8 +1,10 @@
 // app.js
 $(function() {
 	$( "#datepicker" ).datepicker();
-	getImages('gigharbor');
+	getImages(tag);
 });
+var tag = 'gigharbor';
+var clientID = '6734a9a21d4c47a39050e15a0487adc8';
 
 var loadImages = function(igObject) {
 	// empty the image id element
@@ -13,16 +15,17 @@ var loadImages = function(igObject) {
 		html[i] = '<img src="' + igObject.data[i].images.standard_resolution.url + '" alt="' + igObject.data[i].caption.text + '" id="image' + i + '">';
 		$(html[i]).appendTo('#image').hide();
 	}
-	showImages(html);
+	showImages(html, igObject);
 };
 
-var showImages = function(array) {
+var showImages = function(array, igObject) {
 	// showImages with 5 second delay between images
 	var j = 0;
 	$('#image img').eq(j).fadeIn(2000);	// reveal the first image
 	var loop = setInterval(function() {
 		if(j >= array.length) {
-		clearInterval(loop);
+			getMoreImages(tag);
+			clearInterval(loop);
 		}
 		// skip the first image since it was loaded earlier
 		if (j > 0) {
@@ -30,14 +33,15 @@ var showImages = function(array) {
 			$('#image img').eq(j).fadeIn(2000);
 		}
 		j++;
-		console.log('j = ' + j);
+		console.log('j = ' + j + '; loop = ' + loop);
 	}, 5000);
 
 };
 
-var getImages = function(tag) {
-	var clientID = '6734a9a21d4c47a39050e15a0487adc8'
-	var endpoint = 'https://api.instagram.com/v1/tags/' + tag + '/media/recent?client_id=' + clientID;
+var getMoreImages = function(tag) {
+	var endpoint = 'https://api.instagram.com/v1/tags/' + tag;
+		endpoint += '/media/recent?client_id=' + clientID;
+		endpoint += '&max_id=' + '1064953093328255764';
 	// var endpoint = 'https://api.instagram.com/v1/tags/gigharbor/media/recent?client_id=6734a9a21d4c47a39050e15a0487adc8';
 	$.ajax({
 		url: endpoint,
@@ -50,13 +54,25 @@ var getImages = function(tag) {
 		loadImages(response);
 	})
 	.fail(function(jqXHR, error, errorThrown){
-		var errorElem = showError(error);
-		$('.search-results').append(errorElem);
+		console.log(error);
 	});
 };
-// takes error string and turns it into displayable DOM element
-var showError = function(error){
-	var errorElem = $('.templates .error').clone();
-	var errorText = '<p>' + error + '</p>';
-	errorElem.append(errorText);
+
+var getImages = function(tag) {
+	var endpoint = 'https://api.instagram.com/v1/tags/' + tag + '/media/recent?client_id=' + clientID;
+	// var endpoint = 'https://api.instagram.com/v1/tags/gigharbor/media/recent?client_id=6734a9a21d4c47a39050e15a0487adc8';
+	$.ajax({
+		url: endpoint,
+		dataType: "jsonp",
+		cache: "false",
+		type: "GET",
+		data: { count: 5 }
+	})
+	.done(function(response) {
+		console.log(response);
+		loadImages(response);
+	})
+	.fail(function(jqXHR, error, errorThrown){
+		console.log(error);
+	});
 };
