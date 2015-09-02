@@ -6,7 +6,7 @@ $(function() {
 
 var loadImages = function(igObject) {
 	// empty the image id element
-	// $('#image').empty();
+	$('#image').empty();
 	// load images into array
 	var html = [];
 	for (var i = 0; i < igObject.data.length; i++) {
@@ -24,8 +24,11 @@ var showImages = function(array) {
 		if(j >= array.length) {
 		clearInterval(loop);
 		}
-		$('#image img').eq(j).fadeOut(2000);
-		$('#image img').eq(j).fadeIn(2000);
+		// skip the first image since it was loaded earlier
+		if (j > 0) {
+			$('#image img').eq(j).fadeOut(2000);
+			$('#image img').eq(j).fadeIn(2000);
+		}
 		j++;
 		console.log('j = ' + j);
 	}, 5000);
