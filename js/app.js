@@ -6,14 +6,26 @@ $(function() {
 
 var loadImages = function(igObject) {
 	// empty the image id element
-	$('#image').empty();
-	// show a new image
+	// $('#image').empty();
+	// load images into array
 	var html = [];
-	// make an array here
 	for (var i = 0; i < igObject.data.length; i++) {
 		html[i] = '<img src="' + igObject.data[i].images.standard_resolution.url + '" alt="' + igObject.data[i].caption.text + '" id="image' + i + '">';
-		$('#image').append(html[i]);
+		$(html[i]).appendTo('#image').hide();
 	}
+	// showImages - TODO: move to it's own function
+	var j = 0;
+	$('#image img').eq(j).fadeIn(2000);
+	var loop = setInterval(function() {
+		if(j >= html.length) {
+		clearInterval(loop);
+		}
+		$('#image img').eq(j).fadeOut(2000);
+		$('#image img').eq(j).fadeIn(2000);
+		j++;
+		console.log('j = ' + j);
+	}, 5000);
+
 };
 
 var getImages = function(tag) {
