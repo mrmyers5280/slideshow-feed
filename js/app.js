@@ -13,11 +13,15 @@ var loadImages = function(igObject) {
 		html[i] = '<img src="' + igObject.data[i].images.standard_resolution.url + '" alt="' + igObject.data[i].caption.text + '" id="image' + i + '">';
 		$(html[i]).appendTo('#image').hide();
 	}
-	// showImages - TODO: move to it's own function
+	showImages(html);
+};
+
+var showImages = function(array) {
+	// showImages with 5 second delay between images
 	var j = 0;
-	$('#image img').eq(j).fadeIn(2000);
+	$('#image img').eq(j).fadeIn(2000);	// reveal the first image
 	var loop = setInterval(function() {
-		if(j >= html.length) {
+		if(j >= array.length) {
 		clearInterval(loop);
 		}
 		$('#image img').eq(j).fadeOut(2000);
