@@ -15,16 +15,17 @@ var loadImages = function(igObject) {
 		html[i] = '<img src="' + igObject.data[i].images.standard_resolution.url + '" alt="' + igObject.data[i].caption.text + '" id="image' + i + '">';
 		$(html[i]).appendTo('#image').hide();
 	}
-	showImages(html, igObject);
+	var nextBatchId = igObject.pagination.next_max_tag_id;
+	showImages(html, nextBatchId);
 };
 
-var showImages = function(array, igObject) {
+var showImages = function(array, nextBatchId) {
 	// showImages with 5 second delay between images
 	var j = 0;
 	$('#image img').eq(j).fadeIn(2000);	// reveal the first image
 	var loop = setInterval(function() {
 		if(j >= array.length) {
-			getMoreImages(tag);
+			getMoreImages(nextBatchId);
 			clearInterval(loop);
 		}
 		// skip the first image since it was loaded earlier
@@ -38,16 +39,17 @@ var showImages = function(array, igObject) {
 
 };
 
-var getMoreImages = function(tag) {
+var getMoreImages = function(nextBatchId) {
 	var endpoint = 'https://api.instagram.com/v1/tags/' + tag;
 		endpoint += '/media/recent?client_id=' + clientID;
-		endpoint += '&max_id=' + '1064953093328255764';
+		endpoint += '&max_id=' + nextBatchId;
 	// var endpoint = 'https://api.instagram.com/v1/tags/gigharbor/media/recent?client_id=6734a9a21d4c47a39050e15a0487adc8';
 	$.ajax({
 		url: endpoint,
 		dataType: "jsonp",
 		cache: "false",
-		type: "GET"
+		type: "GET",
+		data: { count: 5 }
 	})
 	.done(function(response) {
 		console.log(response);
