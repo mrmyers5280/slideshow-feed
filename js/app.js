@@ -1,7 +1,6 @@
 // app.js
 !function() { // Immediately invoked function expression (IIFE)
 	$(function() {
-		$( "#datepicker" ).datepicker();
 		// TODO: Get tag input from user here
 		getImages(tag);
 	});
