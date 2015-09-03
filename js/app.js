@@ -4,12 +4,16 @@
 		// TODO: Get tag input from user here
 		$('body').on('click', '#startBtn', function(event) {
 			event.preventDefault();
-			// $('input[name="tag"]').empty();
+			
 			tag = $('#searchTag').val();
-			getImages(tag);
-			console.log(tag);
+			if (tag != '') {
+				getImages(tag);
+				console.log(tag);
+			} else {
+				alert('Please enter a tag to search for.');
+			}
 		});
-		// getImages(tag);
+
 	});
 	var tag = '';
 	var clientID = '6734a9a21d4c47a39050e15a0487adc8';
