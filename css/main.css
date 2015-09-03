@@ -37,16 +37,19 @@ input {
 	width: 150px;
 	padding: 0 5px;
 }
-input[name="date"] {
-	width: 100px;
-	margin-left: 7px;
+#form {
+	text-align: center;
 }
 button {
 	height: 30px;
 	margin-left: 15px;
+	color: #ffffff
 }
-#form {
-	text-align: center;
+#startBtn {
+	background-color: #079032;
+}
+#stopBtn {
+	background-color: #860707;
 }
 #image img {
 	width: 500px;
