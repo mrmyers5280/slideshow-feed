@@ -2,9 +2,16 @@
 !function() { // Immediately invoked function expression (IIFE)
 	$(function() {
 		// TODO: Get tag input from user here
-		getImages(tag);
+		$('body').on('click', '#startBtn', function(event) {
+			event.preventDefault();
+			// $('input[name="tag"]').empty();
+			tag = $('#searchTag').val();
+			getImages(tag);
+			console.log(tag);
+		});
+		// getImages(tag);
 	});
-	var tag = 'gigharbor';
+	var tag = '';
 	var clientID = '6734a9a21d4c47a39050e15a0487adc8';
 
 	var loadImages = function(igObject) {
