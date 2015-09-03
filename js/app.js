@@ -1,10 +1,8 @@
 // app.js
 !function() { // Immediately invoked function expression (IIFE)
 	$(function() {
-		// TODO: Get tag input from user here
 		$('body').on('click', '#startBtn', function(event) {
 			event.preventDefault();
-			
 			tag = $('#searchTag').val();
 			if (tag != '') {
 				getImages(tag);
@@ -13,10 +11,15 @@
 				alert('Please enter a tag to search for.');
 			}
 		});
-
+		$('body').on('click', '#stopBtn', function(event) {
+			event.preventDefault();
+			clearInterval(intervalID);
+		});
 	});
+
 	var tag = '';
 	var clientID = '6734a9a21d4c47a39050e15a0487adc8';
+	var intervalID = '';
 
 	var loadImages = function(igObject) {
 		// empty the image id element
@@ -36,16 +39,16 @@
 		// showImages with 5 second delay between images
 		var j = 0;
 		$('#image img').eq(j).fadeIn(2000);	// reveal the first image and move j to the next image
-		var loop = setInterval(function() {
+		intervalID = setInterval(function() {
 			// skip the first image since it was loaded earlier
 			$('#image img').eq(j).fadeOut(2000);
 			if(j < array.length - 1) {
 				$('#image img').eq(++j).fadeIn(2000);
 			} else {
 				getMoreImages(nextBatchId);
-				clearInterval(loop);
+				clearInterval(intervalID);
 			}
-			console.log('j = ' + j + '; loop = ' + loop);
+			console.log('j = ' + j + '; intervalID = ' + intervalID);
 		}, 5000);
 
 	};
