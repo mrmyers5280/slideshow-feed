@@ -61,7 +61,6 @@
 		var endpoint = 'https://api.instagram.com/v1/tags/' + tag;
 			endpoint += '/media/recent?client_id=' + clientID;
 			endpoint += '&max_id=' + nextBatchId;
-		// var endpoint = 'https://api.instagram.com/v1/tags/gigharbor/media/recent?client_id=6734a9a21d4c47a39050e15a0487adc8';
 		$.ajax({
 			url: endpoint,
 			dataType: "jsonp",
@@ -89,8 +88,13 @@
 			data: { count: 5 }
 		})
 		.done(function(response) {
-			console.log(response);
-			loadImages(response);
+			if (response.data.length > 0) {
+				console.log(response);
+				loadImages(response);
+			} else {
+				$('#searchTag').val(''); // empty the text box
+				alert('Your tag returned no items. Please try another tag.');
+			}
 		})
 		.fail(function(jqXHR, error, errorThrown){
 			console.log(error);
