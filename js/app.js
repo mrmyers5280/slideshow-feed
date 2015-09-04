@@ -20,6 +20,7 @@
 	var tag = '';
 	var clientID = '6734a9a21d4c47a39050e15a0487adc8';
 	var intervalID = '';
+	var imageImg = $('#image a'); // this fails, why? eq?
 
 	var loadImages = function(igObject) {
 		// empty the image id element
@@ -27,10 +28,13 @@
 		// load images into array
 		var html = [];
 		for (var i = 0; i < igObject.data.length; i++) {
-			// TODO: Make images clickable - link to image on Instagram
-			html[i] = '<img src="' + igObject.data[i].images.standard_resolution.url + '" alt="' + igObject.data[i].caption.text + '" id="image' + i + '">';
+			// Build HTML string to show image and link it to Instagram
+			html[i] = '<a href="' + igObject.data[i].link + '" target="_blank">';
+			html[i] += '<img src="' + igObject.data[i].images.standard_resolution.url + '" alt="' + igObject.data[i].caption.text + '" id="image' + i + '">';
+			html[i] += '</a>'
 			$(html[i]).appendTo('#image').hide();
 		}
+		// Store the next_max_tag_id to get the next batch of images
 		var nextBatchId = igObject.pagination.next_max_tag_id;
 		showImages(html, nextBatchId);
 	};
@@ -38,12 +42,12 @@
 	var showImages = function(array, nextBatchId) {
 		// showImages with 5 second delay between images
 		var j = 0;
-		$('#image img').eq(j).fadeIn(2000);	// reveal the first image and move j to the next image
+		$('#image a').eq(j).fadeIn(2000);	// reveal the first image
 		intervalID = setInterval(function() {
-			// skip the first image since it was loaded earlier
-			$('#image img').eq(j).fadeOut(2000);
+			// fadeOut the first image since it was loaded earlier
+			$('#image a').eq(j).fadeOut(2000);
 			if(j < array.length - 1) {
-				$('#image img').eq(++j).fadeIn(2000);
+				$('#image a').eq(++j).fadeIn(2000);	// advance to next image and reveal it
 			} else {
 				getMoreImages(nextBatchId);
 				clearInterval(intervalID);
