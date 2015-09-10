@@ -25,14 +25,18 @@
 	var loadImages = function(igObject) {
 		// empty the image id element
 		$('#image').empty();
+		$('#credit').empty();
 		// load images into array
 		var html = [];
+		var credit = [];
 		for (var i = 0; i < igObject.data.length; i++) {
 			// Build HTML string to show image and link it to Instagram
 			html[i] = '<a href="' + igObject.data[i].link + '" target="_blank">';
 			html[i] += '<img src="' + igObject.data[i].images.standard_resolution.url + '" alt="' + igObject.data[i].caption.text + '" id="image' + i + '">';
 			html[i] += '</a>'
 			$(html[i]).appendTo('#image').hide();
+			credit[i] = '<p>Photo by: ' + igObject.data[i].user.username + '</p>';
+			$(credit[i]).appendTo('#credit').hide();
 		}
 		// Store the next_max_tag_id to get the next batch of images
 		var nextBatchId = igObject.pagination.next_max_tag_id;
@@ -43,11 +47,14 @@
 		// showImages with 5 second delay between images
 		var j = 0;
 		$('#image a').eq(j).fadeIn(2000);	// reveal the first image
+		$('#credit p').eq(j).fadeIn(2000);	// show the photo credit
 		intervalID = setInterval(function() {
 			// fadeOut the first image since it was loaded earlier
 			$('#image a').eq(j).fadeOut(2000);
+			$('#credit p').eq(j).fadeOut(2000);
 			if(j < array.length - 1) {
 				$('#image a').eq(++j).fadeIn(2000);	// advance to next image and reveal it
+				$('#credit p').eq(j).fadeIn(2000);
 			} else {
 				getMoreImages(nextBatchId);
 				clearInterval(intervalID);
