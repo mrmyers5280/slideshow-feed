@@ -58,3 +58,8 @@ button {
 	left: 50%;
 	margin-left: -250px;
 }
+#credit p {
+	position: absolute;
+	left: 71%;
+	margin-top: 500px;
+}
