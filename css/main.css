@@ -63,3 +63,11 @@ button {
 	left: 71%;
 	margin-top: 500px;
 }
+#player {
+	margin: 525px auto 0 auto;
+	width: 500px;
+	padding: 10px 0;
+}
+#playerBackground {
+	background-color: #dddddd;
+}
