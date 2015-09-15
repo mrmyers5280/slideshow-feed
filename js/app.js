@@ -22,6 +22,10 @@
 	var tag = '';
 	var clientID = '6734a9a21d4c47a39050e15a0487adc8';
 	var intervalID = '';
+	// initialize Soundcloud client with app credentials
+	SC.initialize({
+		client_id: 'ea1da5d568fd0336237e798e85d121f4',
+	});
 
 	var loadImages = function(igObject) {
 		// empty the image id element
@@ -113,20 +117,17 @@
 
 	var getSound = function() {
 		// Get track from Soundcloud
-		// initialize client with app credentials
-		SC.initialize({
-			client_id: 'ea1da5d568fd0336237e798e85d121f4',
-		});
 		// find all sounds of chill licensed under 'creative commons'
 		SC.get('/tracks', { genres: 'chill', license: 'cc-by' }, function(tracks) {
 			console.log(tracks);
 			// $('#player').html(tracks[0].title);
-			SC.oEmbed(tracks[0].permalink_url, {auto_play: true, maxheight: 166}, document.getElementById('player'));
-			// tracks[0].play('tracks', {volume:50, onfinish:playNextSound});
+			playSound(tracks);
 		});
-		var getSoundcloud = function() {
-			var scEndpoint = ''
-		};
+	};
+
+	var playSound = function(tracks) {
+		var randomSong = Math.floor(Math.random() * 9);
+		SC.oEmbed(tracks[randomSong].permalink_url, {auto_play: true, maxheight: 166}, document.getElementById('player'));
 	};
 
 }(); // Immediately invoked function expression (IIFE)
