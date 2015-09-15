@@ -20,7 +20,6 @@
 	var tag = '';
 	var clientID = '6734a9a21d4c47a39050e15a0487adc8';
 	var intervalID = '';
-	var imageImg = $('#image a'); // this fails, why? eq?
 
 	var loadImages = function(igObject) {
 		// empty the image id element
@@ -45,16 +44,18 @@
 
 	var showImages = function(array, nextBatchId) {
 		// showImages with 5 second delay between images
+		var $images = $('#image a');
+		var $credit = $('#credit p');
 		var j = 0;
-		$('#image a').eq(j).fadeIn(2000);	// reveal the first image
-		$('#credit p').eq(j).fadeIn(2000);	// show the photo credit
+		$images.eq(j).fadeIn(2000);	// reveal the first image
+		$credit.eq(j).fadeIn(2000);	// show the photo credit
 		intervalID = setInterval(function() {
 			// fadeOut the first image since it was loaded earlier
-			$('#image a').eq(j).fadeOut(2000);
-			$('#credit p').eq(j).fadeOut(2000);
+			$images.eq(j).fadeOut(2000);
+			$credit.eq(j).fadeOut(2000);
 			if(j < array.length - 1) {
-				$('#image a').eq(++j).fadeIn(2000);	// advance to next image and reveal it
-				$('#credit p').eq(j).fadeIn(2000);
+				$images.eq(++j).fadeIn(2000);	// advance to next image and reveal it
+				$credit.eq(j).fadeIn(2000);
 			} else {
 				getMoreImages(nextBatchId);
 				clearInterval(intervalID);
