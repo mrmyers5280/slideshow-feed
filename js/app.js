@@ -15,6 +15,7 @@
 		$('body').on('click', '#stopBtn', function(event) {
 			event.preventDefault();
 			clearInterval(intervalID);
+			// TODO: Stop the music too
 		});
 	});
 
@@ -118,9 +119,10 @@
 		});
 		// find all sounds of chill licensed under 'creative commons'
 		SC.get('/tracks', { genres: 'chill', license: 'cc-by' }, function(tracks) {
-		  console.log(tracks);
-		  $('#player').html(tracks[0].title);
-		  SC.oEmbed(tracks[0].permalink_url, document.getElementById('player'));
+			console.log(tracks);
+			// $('#player').html(tracks[0].title);
+			SC.oEmbed(tracks[0].permalink_url, {auto_play: true, maxheight: 166}, document.getElementById('player'));
+			// tracks[0].play('tracks', {volume:50, onfinish:playNextSound});
 		});
 		var getSoundcloud = function() {
 			var scEndpoint = ''
