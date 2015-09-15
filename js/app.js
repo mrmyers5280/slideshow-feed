@@ -7,6 +7,7 @@
 			if (tag != '') {
 				getImages(tag);
 				console.log(tag);
+				getSound();
 			} else {
 				alert('Please enter a tag to search for.');
 			}
@@ -108,4 +109,22 @@
 			console.log(error);
 		});
 	};
+
+	var getSound = function() {
+		// Get track from Soundcloud
+		// initialize client with app credentials
+		SC.initialize({
+			client_id: 'ea1da5d568fd0336237e798e85d121f4',
+		});
+		// find all sounds of chill licensed under 'creative commons'
+		SC.get('/tracks', { genres: 'chill', license: 'cc-by' }, function(tracks) {
+		  console.log(tracks);
+		  $('#player').html(tracks[0].title);
+		  SC.oEmbed(tracks[0].permalink_url, document.getElementById('player'));
+		});
+		var getSoundcloud = function() {
+			var scEndpoint = ''
+		};
+	};
+
 }(); // Immediately invoked function expression (IIFE)
