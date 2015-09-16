@@ -119,6 +119,7 @@
 		// Get track from Soundcloud
 		// find all sounds of chill licensed under 'creative commons'
 		SC.get('/tracks', { genres: 'chill', license: 'cc-by' }, function(tracks) {
+		// SC.get('/playlists', { q: 'chill' }, function(tracks) {
 			console.log(tracks);
 			// $('#player').html(tracks[0].title);
 			playSound(tracks);
@@ -128,6 +129,7 @@
 	var playSound = function(tracks) {
 		var randomSong = Math.floor(Math.random() * 9);
 		SC.oEmbed(tracks[randomSong].permalink_url, {auto_play: true, maxheight: 166}, document.getElementById('player'));
+		// SC.oEmbed(tracks[0].permalink_url, {auto_play: true, maxheight: 166}, document.getElementById('player'));
 	};
 
 }(); // Immediately invoked function expression (IIFE)
