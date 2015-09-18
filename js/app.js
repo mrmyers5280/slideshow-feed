@@ -79,8 +79,7 @@
 			url: endpoint,
 			dataType: "jsonp",
 			cache: "false",
-			type: "GET",
-			data: { count: 5 }
+			type: "GET"
 		})
 		.done(function(response) {
 			console.log(response);
@@ -98,8 +97,7 @@
 			url: endpoint,
 			dataType: "jsonp",
 			cache: "false",
-			type: "GET",
-			data: { count: 5 }
+			type: "GET"
 		})
 		.done(function(response) {
 			if (response.data.length > 0) {
