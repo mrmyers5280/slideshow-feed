@@ -4,12 +4,13 @@
 		$('body').on('click', '#startBtn', function(event) {
 			event.preventDefault();
 			tag = $('#searchTag').val();
-			if (tag != '') {
+			// tag must not be empty and can only contain letters and numbers
+			if (tag != '' && !tag.match(/\W|_/)) {
 				getImages(tag);
 				console.log(tag);
 				getSound();
 			} else {
-				alert('Please enter a tag to search for.');
+				alert('Please enter a tag to search for. Tags may only contain letters and numbers with no spaces.');
 			}
 		});
 		$('body').on('click', '#stopBtn', function(event) {
@@ -66,7 +67,6 @@
 				getMoreImages(nextBatchId);
 				clearInterval(intervalID);
 			}
-			console.log('j = ' + j + '; intervalID = ' + intervalID);
 		}, 5000);
 
 	};
@@ -126,7 +126,7 @@
 
 	var playSound = function(tracks) {
 		var randomSong = Math.floor(Math.random() * 9);
-		SC.oEmbed(tracks[randomSong].permalink_url, {auto_play: true, maxheight: 166}, document.getElementById('player'));
+		SC.oEmbed(tracks[randomSong].permalink_url, {auto_play: false, maxheight: 166}, document.getElementById('player'));
 		// SC.oEmbed(tracks[0].permalink_url, {auto_play: true, maxheight: 166}, document.getElementById('player'));
 	};
 
