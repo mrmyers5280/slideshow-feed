@@ -18,6 +18,9 @@
 	width: 500px;
 	margin: 0 auto;
 }
+.dialog {
+	display: none;
+}
 #header {
 	color: #ffffff;
 	background-color: #004879;
