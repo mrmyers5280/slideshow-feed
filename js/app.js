@@ -10,13 +10,20 @@
 				console.log(tag);
 				getSound();
 			} else {
-				alert('Please enter a tag to search for. Tags may only contain letters and numbers with no spaces.');
+				// alert('Please enter a tag to search for. Tags may only contain letters and numbers with no spaces.');
+				$( "#dialog-message" ).dialog({
+					modal: true,
+					buttons: {
+						Ok: function() {
+							$( this ).dialog( "close" );
+						}
+					}
+				});
 			}
 		});
 		$('body').on('click', '#stopBtn', function(event) {
 			event.preventDefault();
 			clearInterval(intervalID);
-			// TODO: Stop the music too
 		});
 	});
 
@@ -104,8 +111,15 @@
 				console.log(response);
 				loadImages(response);
 			} else {
-				$('#searchTag').val(''); // empty the text box
-				alert('Your tag returned no items. Please try another tag.');
+				// alert('Your tag returned no items. Please try another tag.');
+				$( "#dialog-no-results" ).dialog({
+					modal: true,
+					buttons: {
+						Ok: function() {
+							$( this ).dialog( "close" );
+						}
+					}
+				});
 			}
 		})
 		.fail(function(jqXHR, error, errorThrown){
