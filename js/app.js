@@ -59,10 +59,12 @@
 	var showImages = function(array, nextBatchId) {
 		// showImages with 5 second delay between images
 		var $images = $('#image a');
+		var $imageTags = $('#image img');
 		var $credit = $('#credit p');
 		var j = 0;
 		$images.eq(j).fadeIn(2000);	// reveal the first image
 		$credit.eq(j).fadeIn(2000);	// show the photo credit
+		setBlurredBkg($imageTags.eq(j).attr('src'));
 		intervalID = setInterval(function() {
 			// fadeOut the first image since it was loaded earlier
 			$images.eq(j).fadeOut(2000);
@@ -70,6 +72,7 @@
 			if(j < array.length - 1) {
 				$images.eq(++j).fadeIn(2000);	// advance to next image and reveal it
 				$credit.eq(j).fadeIn(2000);
+				setBlurredBkg($imageTags.eq(j).attr('src'));
 			} else {
 				getMoreImages(nextBatchId);
 				clearInterval(intervalID);
@@ -126,6 +129,10 @@
 			console.log(error);
 		});
 	};
+
+	var setBlurredBkg = function(url) {
+		$('#blurredImage').css('background-image', 'url(' + url + ')');
+	}
 
 	var getSound = function() {
 		// Get track from Soundcloud
