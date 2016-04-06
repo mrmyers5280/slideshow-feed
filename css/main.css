@@ -54,20 +54,29 @@ button {
 #stopBtn {
 	background-color: #860707;
 }
+#image {
+	text-align: center;
+}
 #image img {
 	width: 500px;
 	padding: 15px 0;
+	z-index: 9999;
+}
+#blurredImage {
 	position: absolute;
-	left: 50%;
-	margin-left: -250px;
+	height: 100%;
+	width: 100%;
+	-webkit-filter: blur(10px);
+	background-size: cover;
+	background-repeat: no-repeat;
+	z-index: -1;
 }
 #credit p {
-	position: absolute;
+	position: relative;
 	left: 71%;
-	margin-top: 500px;
 }
 #player {
-	margin: 525px auto 0 auto;
+	margin: 20px auto;
 	width: 500px;
 	padding: 10px 0;
 }
