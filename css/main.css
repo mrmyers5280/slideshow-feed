@@ -74,10 +74,13 @@ button {
 	background-repeat: no-repeat;
 	z-index: -1;
 }
-#credit p {
-	position: relative;
-	left: 71%;
+#credit {
 	margin-top: 525px;
+	height: 1.5em;
+}
+#credit p {
+	position: absolute;
+	left: 71%;
 }
 #player {
 	margin: 20px auto;
