@@ -78,12 +78,10 @@ button {
 	z-index: -1;
 }
 #credit {
-	/*margin-top: 525px;*/
 	height: 1.5em;
 }
 #credit p {
 	position: relative;
-	/*left: 71%;*/
 	text-align: center;
 }
 #player {
